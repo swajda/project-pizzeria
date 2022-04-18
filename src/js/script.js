@@ -125,6 +125,10 @@
       const thisProduct = this;
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+      thisProduct.amountWidgetElem.addEventListener('updated', function () {
+        thisProduct.processOrder();
+      });
+
     }
 
     processOrder() {
@@ -161,7 +165,7 @@
           }
         }
       }
-
+      price *= thisProduct.amountWidget.value;
       thisProduct.priceElem.innerHTML = price;
     }
   }
@@ -188,15 +192,17 @@
 
     setValue(value) {
       const thisWidget = this;
-
+      thisWidget.value = settings.amountWidget.defaultValue;
       const newValue = parseInt(value),
         maxValue = settings.amountWidget.defaultMax,
         minValue = settings.amountWidget.defaultMin;
+        
 
       if (thisWidget.value !== newValue && !isNaN(newValue) && newValue >= minValue - 1 && newValue <= maxValue + 1) {
         thisWidget.value = newValue;
       }
       thisWidget.input.value = thisWidget.value;
+      thisWidget.announce();
     }
 
     initActions() {
@@ -209,15 +215,19 @@
       thisWidget.linkDecrease.addEventListener('click', function (event) {
         event.preventDefault();
         thisWidget.setValue(thisWidget.value - 1);
-
       });
 
       thisWidget.linkIncrease.addEventListener('click', function (event) {
         event.preventDefault();
         thisWidget.setValue(thisWidget.value + 1);
-
       });
+    }
 
+    announce() {
+      const thisWidget = this;
+
+      const event = new Event('updated');
+      thisWidget.element.dispatchEvent(event);
     }
 
   }
