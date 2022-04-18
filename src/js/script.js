@@ -175,7 +175,7 @@
       const thisWidget = this;
 
       thisWidget.getElements(element);
-      thisWidget.setValue(thisWidget.input.value);
+      thisWidget.setValue(settings.amountWidget.defaultValue);
       thisWidget.initActions();
       console.log('AmountWidget:', thisWidget);
       console.log('constructor arguments:', element);
@@ -192,11 +192,10 @@
 
     setValue(value) {
       const thisWidget = this;
-      thisWidget.value = settings.amountWidget.defaultValue;
       const newValue = parseInt(value),
         maxValue = settings.amountWidget.defaultMax,
         minValue = settings.amountWidget.defaultMin;
-        
+
 
       if (thisWidget.value !== newValue && !isNaN(newValue) && newValue >= minValue - 1 && newValue <= maxValue + 1) {
         thisWidget.value = newValue;
