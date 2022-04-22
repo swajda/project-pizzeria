@@ -386,6 +386,16 @@
         totalPrice.innerHTML = thisCart.totalPrice;
       }
     }
+
+    remove(removeProduct) {
+      const thisCart = this;
+
+      const removeProductIndex = thisCart.products.indexOf(removeProduct);
+      thisCart.products.splice(removeProductIndex, 1);
+      removeProduct.dom.wrapper.remove();
+
+      thisCart.update();
+    }
     
   }
 
@@ -409,7 +419,7 @@
       const thisCartProduct = this;
 
       thisCartProduct.dom = {};
-      thisCartProduct.dom.wraper = element;
+      thisCartProduct.dom.wrapper = element;
       thisCartProduct.dom.amountWidget = element.querySelector(select.cartProduct.amountWidget);
       thisCartProduct.dom.price = element.querySelector(select.cartProduct.price);
       thisCartProduct.dom.edit = element.querySelector(select.cartProduct.edit);
