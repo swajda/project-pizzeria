@@ -38,14 +38,7 @@ export const select = {
       input: 'input[type="range"]',
       output: '.output',
     },
-    booking: {
-      peopleAmount: '.people-amount',
-      hoursAmount: '.hours-amount',
-      tables: '.floor-plan .table',
-    },
-    nav: {
-      links: '.main-nav a',
-    },
+    
   },
   cart: {
     productList: '.cart__order-summary',
@@ -65,7 +58,15 @@ export const select = {
     edit: '[href="#edit"]',
     remove: '[href="#remove"]',
   },
-
+  booking: {
+    peopleAmount: '.people-amount',
+    hoursAmount: '.hours-amount',
+    tables: '.floor-plan .table',
+  },
+  nav: {
+    links: '.main-nav a',
+  },
+  
 };
 
 export const classNames = {
