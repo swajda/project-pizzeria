@@ -4,33 +4,45 @@ class BaseWidget {
 
     thisWidget.dom = {};
     thisWidget.dom.wrapper = wrapperElement;
-    thisWidget.dom.value = initialValue;
+    thisWidget.correctValue = initialValue;
+  }
+
+  get value() {
+    const thisWidget = this;
+
+    return thisWidget.correctValue;
+  }
+
+  set value(value) {
+    const thisWidget = this;
+    const newValue = thisWidget.parseValue(value);
+
+    if (thisWidget.correctValue !== newValue && thisWidget.isValid(newValue)) {
+      thisWidget.correctValue = newValue;
+      thisWidget.announce();
+    }
+
+    thisWidget.renderValue();
   }
 
   setValue(value) {
     const thisWidget = this;
-    const newValue = thisWidget.parseValue(value);
-      
-    if (newValue !== thisWidget.value && thisWidget.isValid(newValue)) {
-      thisWidget.value = newValue;
-      thisWidget.announce();
-    }
-    
-    thisWidget.renderValue();
+
+    thisWidget.value = value;
   }
 
-  parseValue(value){
+  parseValue(value) {
     return parseInt(value);
   }
-  
-  isValid(value){
+
+  isValid(value) {
     return !isNaN(value);
   }
 
-  renderValue(){
+  renderValue() {
     const thisWidget = this;
 
-    thisWidget.dom.wrapper.innerHTML = thisWidget.value;
+    thisWidget.dom.wrapper.innerHTML = thisWidget.correctValue;
   }
 
   announce() {
