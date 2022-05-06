@@ -161,7 +161,6 @@ class Booking {
     thisBooking.dom.phone = thisBooking.element.querySelector(select.cart.phone);
     thisBooking.dom.address = thisBooking.element.querySelector(select.cart.address);
     thisBooking.dom.starters = thisBooking.element.querySelectorAll(select.booking.starters);
-    console.log(thisBooking.dom.floorPlan);
   }
 
   initWidgets(){
@@ -183,7 +182,6 @@ class Booking {
 
     this.dom.wrapper.addEventListener('submit', function(){
       thisBooking.sendBooking();
-      console.log('asd');
     });
   }
 
@@ -236,7 +234,7 @@ class Booking {
     payload.hour = thisBooking.hourPicker.value;
     payload.table = parseInt(thisBooking.selectedTable);
     payload.duration = parseInt(thisBooking.hoursAmount.value);
-    payload.ppl = parseInt(thisBooking.peopleAmount);
+    payload.ppl = parseInt(thisBooking.peopleWidget.value);
     payload.phone = thisBooking.dom.phone.value;
     payload.address = thisBooking.dom.address.value;
     payload.starters = [];
